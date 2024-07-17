@@ -1,4 +1,4 @@
 lint:
 	npx eslint .
 run:
-	node bin/gendiff.js -h
+	node bin/gendiff.js
