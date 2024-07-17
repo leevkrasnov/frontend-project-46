@@ -5,8 +5,7 @@ import format from './formatters/index.js';
 import parse from './parsers.js';
 
 const getAbsolutPath = (filepath) => path.resolve(process.cwd(), filepath);
-const readFile = (filepath) =>
-  fs.readFileSync(getAbsolutPath(filepath), 'utf-8');
+const readFile = (filepath) => fs.readFileSync(getAbsolutPath(filepath), 'utf-8');
 const getFormat = (filename) => filename.split('.')[1];
 
 const genDiff = (file1, file2, formatName = 'stylish') => {
