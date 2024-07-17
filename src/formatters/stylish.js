@@ -18,8 +18,10 @@ const stringify = (value, depth = 1) => {
   }
   const keys = Object.keys(value);
   const getKeys = keys.map(
-    (key) =>
-      `${makeIndent(depth + 1)}  ${key}: ${stringify(value[key], depth + 1)}`
+    (key) => `${makeIndent(depth + 1)}  ${key}: ${stringify(
+      value[key],
+      depth + 1,
+    )}`,
   );
   return `{\n${getKeys.join('\n')}\n  ${makeIndent(depth)}}`;
 };
@@ -33,13 +35,11 @@ const getStylishFormat = (value, depth = 1) => {
         value.key
       }: ${stringify(value.value, depth)}`;
     case 'changed':
-      return `${makeIndent(depth)}${symbols.deleted} ${value.key}: ${stringify(
-        value.valueBefore,
-        depth
-      )}\n${makeIndent(depth)}${symbols.added} ${value.key}: ${stringify(
-        value.valueAfter,
-        depth
-      )}`;
+      return `${makeIndent(depth)}${symbols.deleted} ${
+        value.key
+      }: ${stringify(value.valueBefore, depth)}\n${makeIndent(depth)}${
+        symbols.added
+      } ${value.key}: ${stringify(value.valueAfter, depth)}`;
     case 'nested':
       return `${makeIndent(depth)}  ${value.key}: {\n${value.children
         .map((val) => getStylishFormat(val, depth + 1))
@@ -49,5 +49,4 @@ const getStylishFormat = (value, depth = 1) => {
   }
 };
 
-export default (diff) =>
-  `{\n${diff.map((value) => getStylishFormat(value, 1)).join('\n')}\n}`;
+export default (diff) => `{\n${diff.map((value) => getStylishFormat(value, 1)).join('\n')}\n}`;

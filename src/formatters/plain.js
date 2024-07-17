@@ -19,7 +19,7 @@ const getPlainFormat = (value, parent = '') => {
       return null;
     case 'changed':
       return `Property '${parent}${value.key}' was updated. From ${stringify(
-        value.valueBefore
+        value.valueBefore,
       )} to ${stringify(value.valueAfter)}`;
     case 'nested':
       return value.children
@@ -31,8 +31,4 @@ const getPlainFormat = (value, parent = '') => {
   }
 };
 
-export default (plain) =>
-  `${plain
-    .map((element) => getPlainFormat(element))
-    .filter((item) => item !== null)
-    .join('\n')}`;
+export default (plain) => `${plain.map((element) => getPlainFormat(element)).filter((item) => item !== null).join('\n')}`;
